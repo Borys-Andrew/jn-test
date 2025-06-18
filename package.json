@@ -1,0 +1,43 @@
+{
+  "name": "jn-test",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix client\" \"npm run dev --prefix server\"",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"**/*.{js,ts,jsx,tsx}\"",
+    "format:check": "prettier --check \"**/*.{js,ts,jsx,tsx}\"",
+    "lint-staged": "lint-staged",
+    "prepare": "husky"
+  },
+  "keywords": [],
+  "author": "Andrew Borys",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^9.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^9.29.0",
+    "@eslint/js": "^9.29.0",
+    "typescript-eslint": "^8.8.0",
+    "eslint-plugin-react": "^7.37.1",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.3.3"
+  },
+  "lint-staged": {
+    "*.{js,ts,jsx,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  }
+}

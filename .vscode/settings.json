@@ -7,6 +7,9 @@
     "typescript",
     "javascriptreact",
     "typescriptreact"
-  ],
-  "eslint.workingDirectories": ["./client", "./server"]
+  ]
+  // "eslint.workingDirectories": [
+  //   { "directory": "./client", "changeProcessCWD": true },
+  //   { "directory": "./server", "changeProcessCWD": true }
+  // ]
 }

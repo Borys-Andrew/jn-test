@@ -1,4 +1,3 @@
-// eslint.config.mjs
 import js from '@eslint/js';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
@@ -6,15 +5,7 @@ import pluginReact from 'eslint-plugin-react';
 import pluginReactHooks from 'eslint-plugin-react-hooks';
 import pluginPrettier from 'eslint-plugin-prettier';
 
-// Імпортуємо shareable config як модулі
-import reactRecommended from 'eslint-plugin-react/configs/recommended.js';
-import reactJsxRuntime from 'eslint-plugin-react/configs/jsx-runtime.js';
-import reactHooksRecommended from 'eslint-plugin-react-hooks/configs/recommended.js';
-import tsRecommended from '@typescript-eslint/eslint-plugin/dist/configs/recommended.js';
-import prettierRecommended from 'eslint-plugin-prettier/configs/recommended.js';
-
 export default [
-  // Ігнорування файлів і папок
   {
     ignores: [
       'node_modules/**',
@@ -26,7 +17,6 @@ export default [
     ],
   },
 
-  // Базова конфігурація для всіх файлів
   {
     files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
     languageOptions: {
@@ -38,7 +28,7 @@ export default [
     ...js.configs.recommended,
   },
 
-  // Конфігурація для клієнтської частини (React + TypeScript)
+  // ✅ Клієнт (React + TypeScript)
   {
     files: ['client/**/*.{js,jsx,ts,tsx}'],
     languageOptions: {
@@ -56,24 +46,26 @@ export default [
       '@typescript-eslint': tseslint,
       prettier: pluginPrettier,
     },
-    ...reactRecommended,
-    ...reactJsxRuntime,
-    ...reactHooksRecommended,
-    ...tsRecommended,
-    ...prettierRecommended,
+    rules: {
+      ...pluginReact.configs.recommended.rules,
+      ...pluginReact.configs['jsx-runtime'].rules,
+      ...pluginReactHooks.configs.recommended.rules,
+      ...tseslint.configs.recommended.rules,
+      ...pluginPrettier.configs.recommended.rules,
+
+      // кастомні
+      'react/react-in-jsx-scope': 'off',
+      '@typescript-eslint/explicit-module-boundary-types': 'off',
+      'prettier/prettier': 'error',
+    },
     settings: {
       react: {
         version: 'detect',
       },
     },
-    rules: {
-      'react/react-in-jsx-scope': 'off',
-      '@typescript-eslint/explicit-module-boundary-types': 'off',
-      'prettier/prettier': 'error',
-    },
   },
 
-  // Конфігурація для серверної частини (Node.js + TypeScript)
+  // ✅ Сервер (Node.js + TypeScript)
   {
     files: ['server/**/*.{js,ts}'],
     languageOptions: {
@@ -89,9 +81,10 @@ export default [
       '@typescript-eslint': tseslint,
       prettier: pluginPrettier,
     },
-    ...tsRecommended,
-    ...prettierRecommended,
     rules: {
+      ...tseslint.configs.recommended.rules,
+      ...pluginPrettier.configs.recommended.rules,
+      'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       'prettier/prettier': 'error',
     },

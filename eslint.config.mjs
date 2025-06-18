@@ -5,7 +5,13 @@ import tseslint from 'typescript-eslint';
 import pluginReact from 'eslint-plugin-react';
 import pluginReactHooks from 'eslint-plugin-react-hooks';
 import pluginPrettier from 'eslint-plugin-prettier';
-import prettierConfig from 'eslint-config-prettier';
+
+// Імпортуємо shareable config як модулі
+import reactRecommended from 'eslint-plugin-react/configs/recommended.js';
+import reactJsxRuntime from 'eslint-plugin-react/configs/jsx-runtime.js';
+import reactHooksRecommended from 'eslint-plugin-react-hooks/configs/recommended.js';
+import tsRecommended from '@typescript-eslint/eslint-plugin/dist/configs/recommended.js';
+import prettierRecommended from 'eslint-plugin-prettier/configs/recommended.js';
 
 export default [
   // Ігнорування файлів і папок
@@ -50,13 +56,11 @@ export default [
       '@typescript-eslint': tseslint,
       prettier: pluginPrettier,
     },
-    extends: [
-      'plugin:react/recommended',
-      'plugin:react/jsx-runtime',
-      'plugin:react-hooks/recommended',
-      'plugin:@typescript-eslint/recommended',
-      'plugin:prettier/recommended',
-    ],
+    ...reactRecommended,
+    ...reactJsxRuntime,
+    ...reactHooksRecommended,
+    ...tsRecommended,
+    ...prettierRecommended,
     settings: {
       react: {
         version: 'detect',
@@ -85,10 +89,8 @@ export default [
       '@typescript-eslint': tseslint,
       prettier: pluginPrettier,
     },
-    extends: [
-      'plugin:@typescript-eslint/recommended',
-      'plugin:prettier/recommended',
-    ],
+    ...tsRecommended,
+    ...prettierRecommended,
     rules: {
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       'prettier/prettier': 'error',

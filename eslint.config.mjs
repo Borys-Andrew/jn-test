@@ -30,7 +30,7 @@ export default [
 
   // ✅ Клієнт (React + TypeScript)
   {
-    files: ['client/**/*.{js,jsx,ts,tsx}'],
+    files: ['client/**/*.{js,jsx,ts,tsx}', 'client/vite.config.ts'],
     languageOptions: {
       globals: globals.browser,
       parser: tseslint.parser,

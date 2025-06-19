@@ -1,20 +1,42 @@
-import { useState } from 'react';
-import './index.css';
+import { useRoutes } from 'react-router-dom';
+import { AppLayout } from './components';
+import { Paths } from './settings';
+import {
+  CreateHeroPage,
+  HeroDetailsPage,
+  HeroesPage,
+  HomePage,
+  NotFoundPage,
+} from './pages';
 
 function App() {
-  const [count, setCount] = useState(0);
+  const element = useRoutes([
+    {
+      path: Paths.index,
+      element: <AppLayout />,
+      children: [
+        {
+          path: '',
+          element: <HomePage />,
+        },
+        {
+          path: Paths.superhero.index,
+          element: <HeroesPage />,
+        },
+        {
+          path: Paths.superhero.details,
+          element: <HeroDetailsPage />,
+        },
+        {
+          path: Paths.superhero.create.index,
+          element: <CreateHeroPage />,
+        },
+      ],
+    },
+    { path: '*', element: <NotFoundPage /> },
+  ]);
 
-  return (
-    <div className="p-4">
-      <h1 className="text-3xl font-bold">Hello, React with Tailwind!</h1>
-      <button
-        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-        onClick={() => setCount(count + 1)}
-      >
-        Count: {count}
-      </button>
-    </div>
-  );
+  return <>{element}</>;
 }
 
 export default App;

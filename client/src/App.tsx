@@ -4,7 +4,6 @@ import { Paths } from './settings';
 import {
   CreateHeroPage,
   HeroDetailsPage,
-  HeroesPage,
   HomePage,
   NotFoundPage,
 } from './pages';
@@ -20,20 +19,19 @@ function App() {
           element: <HomePage />,
         },
         {
-          path: Paths.superhero.index,
-          element: <HeroesPage />,
-        },
-        {
-          path: Paths.superhero.details,
+          path: Paths.details.index,
           element: <HeroDetailsPage />,
         },
         {
-          path: Paths.superhero.create.index,
+          path: Paths.create.index,
           element: <CreateHeroPage />,
         },
       ],
     },
-    { path: '*', element: <NotFoundPage /> },
+    {
+      path: '*',
+      element: <NotFoundPage />,
+    },
   ]);
 
   return <>{element}</>;

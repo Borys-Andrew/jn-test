@@ -2,14 +2,15 @@ import SuperHero from '../models/superHero';
 import { CreateHeroBody, UpdateHeroBody } from '../types/express';
 import createHttpError from 'http-errors';
 
-export const getAll = async (page: number) => {
-  const limit = 5;
+export const getAll = async (page: number, limit = 5) => {
   const skip = (page - 1) * limit;
   const heroes = await SuperHero.find().skip(skip).limit(limit);
   const total = await SuperHero.countDocuments();
 
   return {
     page,
+    limit,
+    totalResults: total,
     totalPages: Math.ceil(total / limit),
     data: heroes,
   };

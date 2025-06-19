@@ -1,5 +1,3 @@
-const LOCAL_STORAGE_KEYS = {
-  themeKey: 'food-theme',
+export const LOCAL_STORAGE_KEYS = {
+  themeKey: 'hero-theme',
 };
-
-export default LOCAL_STORAGE_KEYS;

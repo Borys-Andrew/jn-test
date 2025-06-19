@@ -6,15 +6,14 @@ import { getLinksFromPaths } from '@/utils';
 
 export const Paths = {
   index: '/',
-  superhero: {
-    index: 'superheroes',
-    create: {
-      index: 'create',
-    },
-    edit: {
-      index: 'edit',
-    },
-    details: ':id',
+  details: {
+    index: ':id',
+  },
+  create: {
+    index: 'create',
+  },
+  edit: {
+    index: 'edit',
   },
   notFound: '404',
 } as const;

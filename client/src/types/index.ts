@@ -20,3 +20,22 @@ export type MapRelativePathsToAbsolute<
         >
       : never;
 };
+export type Hero = {
+  _id: string;
+  nickname: string;
+  real_name: string;
+  origin_description: string;
+  superpowers: string[];
+  catch_phrase: string;
+  images: string[];
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type PaginatedResults<T> = {
+  page: number;
+  limit: number;
+  totalResults: number;
+  totalPages: number;
+  data: T[];
+};

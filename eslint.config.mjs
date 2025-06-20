@@ -37,7 +37,11 @@ export default [
       parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
-        project: ['./client/tsconfig.json', './client/tsconfig.node.json'],
+        project: [
+          './client/tsconfig.json',
+          './client/tsconfig.node.json',
+          './client/tsconfig.app.json',
+        ],
       },
     },
     plugins: {
@@ -54,6 +58,7 @@ export default [
       ...pluginPrettier.configs.recommended.rules,
 
       // кастомні
+      'no-unused-vars': ['error', { args: 'none' }],
       'react/react-in-jsx-scope': 'off',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       'prettier/prettier': 'error',

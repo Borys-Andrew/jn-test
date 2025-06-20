@@ -1,15 +1,8 @@
 import { useSearchParams } from 'react-router-dom';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { useQuery } from '@tanstack/react-query';
-
-import { Button } from '@/components';
 import { heroesAPI } from '@/api';
+
+import { HeroesList, PaginationHeroes } from './components';
 
 export const HomePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -20,41 +13,39 @@ export const HomePage = () => {
   const { data, isLoading } = useQuery({
     ...heroesAPI.getHeroListQueryOptions({ page, limit }),
   });
-  console.log('🚀 ~ HomePage ~ data, isLoading:', { data, isLoading });
 
-  const handlePageChange = (newPage: number) => {
-    setSearchParams({ page: String(newPage), limit: String(limit) });
+  const heroes = data?.data;
+
+  const totalResults = data?.totalResults || 0;
+  console.log('🚀 ~ HomePage ~ totalResults:', totalResults);
+  const totalPages = data?.totalPages || 1;
+
+  const handlePageChange = (newPage: string) => {
+    setSearchParams({ page: newPage, limit: String(limit) });
   };
 
   const handleLimitChange = (newLimit: string) => {
-    setSearchParams({ page: '1', limit: newLimit }); // скидаємо на першу сторінку при зміні ліміту
+    console.log('🚀 ~ handleLimitChange ~ newLimit:', newLimit);
+
+    setSearchParams({ page: '1', limit: newLimit });
   };
 
+  if (!heroes) {
+    return;
+  }
+
   return (
-    <div className="flex-1 flex flex-col items-center justify-center text-center gap-4 py-7">
-      <p>Here will be a list of Heroes with pagination</p>
-
-      {/* Select для ліміту */}
-      <div className="flex items-center gap-2">
-        <span>Heroes per page:</span>
-        <Select value={String(limit)} onValueChange={handleLimitChange}>
-          <SelectTrigger className="w-[100px]">
-            <SelectValue placeholder="Select limit" />
-          </SelectTrigger>
-          <SelectContent>
-            {[5, 10, 20, 50].map(value => (
-              <SelectItem key={value} value={String(value)}>
-                {value}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
-
-      {/* Кнопка переходу на наступну сторінку */}
-      <Button onClick={() => handlePageChange(page + 1)} variant="secondary">
-        Next Page
-      </Button>
+    <div className="flex flex-col justify-between flex-1 gap-4 py-7">
+      <p className="text-lg font-semibold">List of Heroes</p>
+      {isLoading && <p>Loading heroes...</p>}
+      <HeroesList heroes={heroes} />
+      <PaginationHeroes
+        limit={limit}
+        currenPage={page}
+        totalPages={totalPages}
+        onHandleLimitChange={handleLimitChange}
+        onHandlePageChange={handlePageChange}
+      />
     </div>
   );
 };

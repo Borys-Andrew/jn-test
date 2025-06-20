@@ -23,6 +23,23 @@ export const heroesAPI = {
     });
   },
 
+  getSearchQueryHero: ({
+    name,
+    signal,
+  }: {
+    name: string;
+    signal?: AbortSignal;
+  }) => {
+    console.log('API HERO SEARCH NAME', name);
+
+    return jsonApiInstance<any>(
+      `/superheroes/search/${encodeURIComponent(name)}`,
+      {
+        signal,
+      }
+    );
+  },
+
   createHero: ({
     data,
     meta,

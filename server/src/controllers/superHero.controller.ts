@@ -29,6 +29,21 @@ export const getHeroById = async (
   }
 };
 
+export const getHeroBySearch = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const name = req.params.name;
+    console.log('🚀 ~ CONTROLLER name:', name);
+    const hero = await service.getSearchQueryHero(name);
+    res.json(hero);
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const createHero = async (
   req: Request<{}, {}, CreateHeroBody>,
   res: Response,

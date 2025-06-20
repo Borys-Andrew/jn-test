@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { heroesAPI } from '@/api';
 import { useDebounce } from 'use-debounce';
 import { Input } from '@/components/ui/input';
+import { Hero } from '@/types';
 
 export const CreateHeroPage = () => {
   const [name, setName] = useState('');
@@ -39,7 +40,7 @@ export const CreateHeroPage = () => {
 
       {loading && <p>Loading...</p>}
 
-      {heroes.map(hero => (
+      {heroes.map((hero: Hero) => (
         <div
           key={hero.id}
           className="cursor-pointer hover:bg-muted p-2 rounded"
@@ -47,8 +48,8 @@ export const CreateHeroPage = () => {
             console.log('Selected:', hero);
           }}
         >
-          <p>{hero.name}</p>
-          <img src={hero.image.url} className="w-12 h-12" />
+          <p>{hero.nickname}</p>
+          <img src={hero.images[0]} className="w-12 h-12" />
         </div>
       ))}
     </div>

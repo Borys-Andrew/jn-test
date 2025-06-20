@@ -3,6 +3,7 @@ import { CreateHeroBody, UpdateHeroBody } from '../types/express';
 import createHttpError from 'http-errors';
 import fetch from 'node-fetch';
 import dotenv from 'dotenv';
+import { mapApiHeroResults } from '../utils/mapApiHeroResults';
 
 dotenv.config();
 
@@ -40,29 +41,9 @@ export const getSearchQueryHero = async (name: string) => {
     throw createHttpError(404, `No superhero found with name: ${name}`);
   }
 
-  const results = data.results; // беремо першого знайденого
+  const results = data.results;
 
-  return results;
-
-  // Мапимо потрібні поля у формат форми
-  // return {
-  //   name: hero.name,
-  //   image: hero.image?.url || '',
-  //   powerstats: hero.powerstats,
-  //   appearance: {
-  //     gender: hero.appearance?.gender,
-  //     race: hero.appearance?.race,
-  //     height: hero.appearance?.height?.[1] || '', // cm
-  //     weight: hero.appearance?.weight?.[1] || '', // kg
-  //   },
-  //   biography: {
-  //     fullName: hero.biography['full-name'],
-  //     alignment: hero.biography.alignment,
-  //     placeOfBirth: hero.biography['place-of-birth'],
-  //   },
-  //   work: hero.work?.occupation,
-  //   connections: hero.connections?.relatives,
-  // };
+  return results.map((el: any) => mapApiHeroResults(el));
 };
 
 export const create = async (data: CreateHeroBody) => {

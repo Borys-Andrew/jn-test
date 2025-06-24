@@ -4,7 +4,7 @@ import {
   getHeroById,
   createHero,
   updateHero,
-  deleteHero,
+  handleDelete,
   getHeroBySearch,
 } from '../controllers/superHero.controller';
 
@@ -15,6 +15,6 @@ router.get('/search/:name', getHeroBySearch);
 router.get('/:id', getHeroById);
 router.post('/', createHero);
 router.put('/:id', updateHero);
-router.delete('/:id', deleteHero);
+router.delete('/:id', handleDelete);
 
 export default router;

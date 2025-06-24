@@ -30,8 +30,8 @@ export const PaginationHeroes: React.FC<PaginationHeroesProps> = ({
   onHandlePageChange,
 }) => {
   return (
-    <div className="flex gap-2 bottom-0">
-      <div className="flex items-center gap-1.5">
+    <div className="relative flex gap-2 items-center">
+      <div className="absolute left-0 flex items-center gap-1.5">
         <p className="w-fit">Limit:</p>
         <Select
           value={String(limit)}
@@ -50,7 +50,7 @@ export const PaginationHeroes: React.FC<PaginationHeroesProps> = ({
         </Select>
       </div>
 
-      <Pagination className="ml-auto">
+      <Pagination>
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious

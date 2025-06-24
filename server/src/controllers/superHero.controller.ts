@@ -85,7 +85,7 @@ export const updateHero = async (
   }
 };
 
-export const deleteHero = async (
+export const handleDelete = async (
   req: Request,
   res: Response,
   next: NextFunction

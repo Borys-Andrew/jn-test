@@ -30,14 +30,16 @@ export const heroesAPI = {
     name: string;
     signal?: AbortSignal;
   }) => {
-    console.log('API HERO SEARCH NAME', name);
-
-    return jsonApiInstance<any>(
+    return jsonApiInstance<Hero[]>(
       `/superheroes/search/${encodeURIComponent(name)}`,
       {
         signal,
       }
     );
+  },
+
+  getHeroById: ({ id }: { id: string }) => {
+    return jsonApiInstance<Hero>(`/superheroes/${id}`);
   },
 
   createHero: ({

@@ -49,7 +49,7 @@ A monorepo web application for managing a **Superhero** database. It provides fu
 - **Node.js** ≥ v20
 - **npm** ≥ v9
 - **MongoDB** (local or Atlas)
-- Create a `.env` file in the `server/` directory with the following content:
+- Create a `.env` file in the `server/` directory (or project root) with the following content:
 
 ```env
 DB_HOST=mongodb+srv://borysandrey1988:4NJIS4wL0sADKmHk@cluster0.miqhftg.mongodb.net/
@@ -66,13 +66,19 @@ git clone https://github.com/Borys-Andrew/jn-test.git
 cd jn-test
 ```
 
-2. **Install Dependencies**
+2. **Navigate to the cloned directory**
+
+```bash
+cd jn-test
+```
+
+3. **Install Dependencies**
 
 ```bash
 npm install
 ```
 
-3. **Run the Development Server**
+4. **Run the Development Server**
 
 ```bash
 npm run dev

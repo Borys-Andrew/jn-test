@@ -63,7 +63,6 @@ SUPERHERO_API_BASE_URL=https://superheroapi.com/api/8b739e708c6f771ffb9fd969f799
 
 ```bash
 git clone https://github.com/Borys-Andrew/jn-test.git
-cd jn-test
 ```
 
 2. **Navigate to the cloned directory**
